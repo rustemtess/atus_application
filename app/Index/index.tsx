@@ -1,9 +1,14 @@
-import { TextInput, View } from "react-native";
+import { Button, TextInput, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { KeyboardAwareScrollView, KeyboardProvider } from "react-native-keyboard-controller";
-import QRScanner from "./QRScanner";
+import QRScanner from "@/components/QRCamera";
+import { NativeStackScreenProps } from "react-native-screens/lib/typescript/native-stack/types";
+import { RootStackParamList } from "@/app/ScreenTypes";
 
-const Index = () => {
+type HomeScreenProps = NativeStackScreenProps<RootStackParamList, 'Home'>;
+
+const Index = (  { navigation }: HomeScreenProps ) => {
+
     return (
         <KeyboardProvider>
             <SafeAreaView style={{
@@ -13,33 +18,20 @@ const Index = () => {
                 <KeyboardAwareScrollView
                     contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', alignItems: 'center' }}
                 >
-                    <View style={{
-                        backgroundColor: 'blue',
-                        padding: 20, // Немного отступа для удобства
-                        borderRadius: 10, // Скругление углов
-                        width: '80%', // Установка ширины View
-                    }}>
-                        <QRScanner />
-                        <TextInput
-                            placeholder="Test"
-                            keyboardType="numeric"
-                            style={{
-                                backgroundColor: 'red',
-                                height: 40, // Высота текстового поля
-                                paddingHorizontal: 10, // Отступы для текста
-                            }}
-                        />
-                        <TextInput
-                            placeholder="Test"
-                            style={{
-                                backgroundColor: 'red',
-                                height: 40, // Высота текстового поля
-                                paddingHorizontal: 10, // Отступы для текста
-                            }}
-                            secureTextEntry
-                        />
-                    </View>
+                
                 </KeyboardAwareScrollView>
+                <View style={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
+                    width: '100%'
+                }}>
+                    <Button title="Home" />
+                    <Button title="QRScanner" onPress={() => {
+                        navigation.navigate('QRScanner')
+                    }} />
+                    <Button title="Profile" />
+                </View>
             </SafeAreaView>
         </KeyboardProvider>
     );

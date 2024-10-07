@@ -4,11 +4,12 @@ import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
-import Index from './Index/index'
+import Index from './Index'
+import QRScanner from './QRScanner';
+import { RootStackParamList } from './ScreenTypes';
 
-// Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
-const Stack = createStackNavigator();
+const Stack = createStackNavigator<RootStackParamList>();
 
 export default function RootLayout() {
   const [loaded] = useFonts({
@@ -30,7 +31,8 @@ export default function RootLayout() {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator>
-        <Stack.Screen name='Index' component={Index} />
+        <Stack.Screen name='Home' component={Index} />
+        <Stack.Screen name='QRScanner' component={QRScanner} />
         { /* <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
         <Stack.Screen name="+not-found" /> */ }
       </Stack.Navigator>
